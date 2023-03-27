@@ -14,4 +14,8 @@ class DirectorsController < ApplicationController
     @filmography = Movie.where({:director_id => the_id})
     render({:template =>"director_template/show.html.erb"})
   end
+  def youngest
+    @youngest = Director.where.not({:dob=>nil}).order({:dob=>:desc}).at(0)
+    render({:template=>"director_template/youngest.html.erb"})
+  end
 end
