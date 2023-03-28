@@ -6,19 +6,12 @@ end
 def actor_details
   actor_id = params.fetch("actor_id")
   @actor = Actor.where({:id => actor_id}).at(0)
-  movie_detail = Movie.all.where({:id=>@actor})
-  information = Character.all.where({:movie_id=>@actor})
-  @movie_info = Movie.all.where({:id=>information})
+
+  characters = Character.where({ :actor_id => actor_id })
+   list_of_movie_ids = characters.map_relation_to_array(:movie_id)
+
+  @filmography = Movie.where({:id=>list_of_movie_ids})
+
   render({:template=>"actor_template/actor_details.html.erb"})
 end
 end
-
-#character table has both movie_id and actor_id
-
-# actor = Actor.where({:id => actor_id}).at(0) # Actor table -> return actor_id columns that match actor_id. example:Morgan Freeman id:1== id:1
-# information = Character.all.where({:movie_id=>actor})
-#return all data in the Character table where the :movie_id matches the actor(id)???
-# @movie_info = Movie.all.where({:id=>information})
-#return all the data from the movie table where the id matches the information
-
-

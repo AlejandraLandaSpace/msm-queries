@@ -84,7 +84,7 @@
 
 
   <tr>
-    <%@movie_info.all.each do |movie|%>
+    <%@filmography.all.each do |movie|%>
     <td>
      <%=movie.title%>
     </td>
@@ -94,11 +94,11 @@
     </td>
      
     <td>
-    <%d = Director.all.where(:id=>movie).at(0)%>
+    <%d = Director.where(:id=>movie.director_id).at(0)%>
      <%=d.name%>
     </td>
     <td>
-     <%c = Character.all.where(:id=>movie).at(0)%>
+     <%c = Character.where(:movie_id=>movie.id,:actor_id=>@actor.id).at(0)%>
       <%=c.name%>
     </td>
     <td>
