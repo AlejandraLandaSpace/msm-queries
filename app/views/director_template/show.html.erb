@@ -62,7 +62,6 @@
 
 <h2>Filmography</h2>
 <table border="1">
-<%@filmography.each do |a_film|%>
   <tr>
     <th>
       ID
@@ -89,8 +88,9 @@
   </tr>
 
   <tr>
+  <%@filmography.each do |a_film|%>
     <td>
-      1
+      <%=a_film.id%>
     </td>
 
     <td>
@@ -111,7 +111,7 @@
     </td>
 
     <td>
-    <a href="">Show details</a>
+    <a href="/movies/<%=a_film.id%>">Show details</a>
     </td>
   </tr>
     <%end%>
