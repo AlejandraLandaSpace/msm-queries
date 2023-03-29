@@ -83,28 +83,18 @@
   </tr>
 
 
-  <tr>
-    <%@filmography.all.each do |movie|%>
-    <td>
-     <%=movie.title%>
-    </td>
-
-    <td>
-      <%=movie.year%>
-    </td>
-     
-    <td>
-    <%d = Director.where(:id=>movie.director_id).at(0)%>
-     <%=d.name%>
-    </td>
-    <td>
-     <%c = Character.where(:movie_id=>movie.id,:actor_id=>@actor.id).at(0)%>
-      <%=c.name%>
-    </td>
-    <td>
-    <a href="/movies/<%=movie.id%>">Show details</a>
-    </td>
+   <% @filmography.each do |film|%>
+    <tr>
+      <td><%= film.title %></td>
+      <td><%= film.year %></td>
+      <% #director.each do |b| %>
+      <td><% d =  Director.where({ :id => film.director_id }).at(0) %> <%= d.name %> </td>
+      <%# end %>
+      <td><% @character.each do |a|%>
+           <%= a.name %>
+      <% end %>
+      </td>
+      <td><a href="/movies/<%= film.id %>">Show details</a></td>
     </tr>
-   <%end%>
-    
-  </table>
+  <% end %>
+</table>
